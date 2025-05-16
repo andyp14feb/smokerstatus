@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SmokerStatus Prediction Using Biometric Data</title>
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  {% if request_form is not defined %}
+  {% set request_form = request.form %}
+  {% endif %}
+
+  <div id="pagewrap">
+
+    <header>
+      <section>
+        <!-- Logo + Title stacked vertically -->
+        <div class="logo">
+          <img src="{{ url_for('static', filename='ai-01.png') }}" alt="Indonesia AI">
+        </div>
+        <div class="logo">
+          <h1>Machine Learning Batch 7 - Sam Altman</h1>
+        </div>
+        <!-- 
+        <div class="contact">
+        <div>🌐 https://github.com/andyp14feb/</div>
+        <div>✉️ andyp14feb@gmail.com</div>
+        </div>
+        -->
+      </section>
+    </header>
+
+    <div class="form-title">
+      <h1>Smoker Status Prediction Using Biometric Data</h1>
+    </div>
+
+    <form id="main-form" method="POST" action="{{ url_for('index') }}">
+      <!-- Extended customer-info section -->
+      <section class="customer-info">
+        <h3>Biometric &amp; Sensory Measurements</h3>
+
+        <!-- Row 1 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="age">Age (years):</label>
+            <input id="age" name="age" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('age','') }}">
+          </div>
+          <div class="form-group">
+            <label for="height">Height (cm):</label>
+            <input id="height" name="height" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('height','') }}">
+          </div>
+          <div class="form-group">
+            <label for="weight">Weight (kg):</label>
+            <input id="weight" name="weight" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('weight','') }}">
+          </div>
+          <div class="form-group">
+            <label for="waist">Waist (cm):</label>
+            <input id="waist" name="waist" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('waist','') }}">
+          </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="eyesight-left">Eye Sight (left):</label>
+            <input id="eyesight-left" name="eyesight_left" type="text" required inputmode="decimal"
+              pattern="^\d*\.?\d*$" value="{{ request_form.get('eyesight_left','') }}">
+          </div>
+          <div class="form-group">
+            <label for="eyesight-right">Eye Sight (right):</label>
+            <input id="eyesight-right" name="eyesight_right" type="text" required inputmode="decimal"
+              pattern="^\d*\.?\d*$" value="{{ request_form.get('eyesight_right','') }}">
+          </div>
+          <div class="form-group">
+            <label>Hearing (left):</label>
+            <div class="radio-group">
+              <label>
+                <input name="hearing_left" type="radio" value="1" required {% if request_form.get('hearing_left')=='1'
+                  %} checked {% endif %}> Can Hear
+                <input name="hearing_left" type="radio" value="2" {% if request_form.get('hearing_left')=='2' %} checked
+                  {% endif %}> Cannot Hear
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Hearing (right):</label>
+            <div class="radio-group">
+              <label>
+                <input name="hearing_right" type="radio" value="1" required {% if request_form.get('hearing_right')=='1'
+                  %} checked {% endif %}> Can Hear
+                <input name="hearing_right" type="radio" value="2" {% if request_form.get('hearing_right')=='2' %}
+                  checked {% endif %}> Cannot Hear
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- Row 3 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="systolic">Systolic:</label>
+            <input id="systolic" name="systolic" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('systolic','') }}">
+          </div>
+          <div class="form-group">
+            <label for="relaxation">Relaxation:</label>
+            <input id="relaxation" name="relaxation" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('relaxation','') }}">
+          </div>
+          <div class="form-group">
+            <label for="fbs">Fasting Blood Sugar:</label>
+            <input id="fbs" name="fasting_blood_sugar" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('fasting_blood_sugar','') }}">
+          </div>
+          <div class="form-group">
+            <label for="cholesterol">Cholesterol:</label>
+            <input id="cholesterol" name="cholesterol" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('cholesterol','') }}">
+          </div>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="triglyceride">Triglyceride:</label>
+            <input id="triglyceride" name="triglyceride" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('triglyceride','') }}">
+          </div>
+          <div class="form-group">
+            <label for="hdl">HDL:</label>
+            <input id="hdl" name="hdl" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('hdl','') }}">
+          </div>
+          <div class="form-group">
+            <label for="ldl">LDL:</label>
+            <input id="ldl" name="ldl" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('ldl','') }}">
+          </div>
+          <div class="form-group">
+            <label for="hemoglobin">Hemoglobin:</label>
+            <input id="hemoglobin" name="hemoglobin" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('hemoglobin','') }}">
+          </div>
+        </div>
+
+        <!-- Row 5 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="urine-protein">Urine Protein:</label>
+            <input id="urine-protein" name="urine_protein" type="text" required inputmode="decimal"
+              pattern="^\d*\.?\d*$" value="{{ request_form.get('urine_protein','') }}">
+          </div>
+          <div class="form-group">
+            <label for="creatinine">Serum Creatinine:</label>
+            <input id="creatinine" name="serum_creatinine" type="text" required inputmode="decimal"
+              pattern="^\d*\.?\d*$" value="{{ request_form.get('serum_creatinine','') }}">
+          </div>
+          <div class="form-group">
+            <label for="ast">AST:</label>
+            <input id="ast" name="ast" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('ast','') }}">
+          </div>
+          <div class="form-group">
+            <label for="alt">ALT:</label>
+            <input id="alt" name="alt" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('alt','') }}">
+          </div>
+        </div>
+
+        <!-- Row 6 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="gtp">GTP:</label>
+            <input id="gtp" name="gtp" type="text" required inputmode="decimal" pattern="^\d*\.?\d*$"
+              value="{{ request_form.get('gtp','') }}">
+          </div>
+          <div class="form-group">
+            <label>Dental Caries:</label>
+            <div class="radio-group">
+              <label>
+                <input name="dental_caries" type="radio" value="1" required {% if request_form.get('dental_caries')=='1'
+                  %} checked {% endif %}> Has Caries
+                <input name="dental_caries" type="radio" value="0" {% if request_form.get('dental_caries')=='0' %}
+                  checked {% endif %}> No Caries
+              </label>
+            </div>
+          </div>
+          <div class="form-group"><!-- slot kosong --></div>
+          <div class="form-group"><!-- slot kosong --></div>
+        </div>
+      </section>
+
+      <section id="model-selection">
+        <h3>Model Selection</h3>
+        <label for="model">Model:</label>
+        <select id="model" name="model">
+          <!-- <option value="" disabled selected>Select a model</option> -->
+          <option value="" disabled {% if not request_form.get('model') %} selected {% endif %}>
+            Select a model
+          </option>
+
+          <!-- 
+      <option value="model1">Model 1</option>
+			<option value="model2">Model 2</option>
+			<option value="model3">Model 3</option>
+      -->
+          {% for model in models %}
+          <option value="{{ model }}" {% if request_form.get('model')==model %} selected {% endif %}>
+            {{ model }}
+          </option>
+          {% endfor %}
+        </select>
+        <div id="model-info" style="margin-top: 1em;">
+          <!-- model info will be injected here , but I think may be later-->
+          <!-- and.... finally I decide not to add complexity of this task hahaha -->
+        </div>
+      </section>
+
+
+      <section id="buttons">
+        <div class="buttons" style="margin-top: 1em;">
+          <button type="submit" id="submit">Submit</button>
+          <button type="button" id="clear">Clear</button>
+          <a href="{{ url_for('simulate_submission') }}" id="fill-sample">Fill form with sample data</a>
+        </div>
+      </section>
+
+    </form>
+
+  </div>
+  <div id="loading-overlay">
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <p>Predicting... please wait</p>
+    </div>
+  </div>
+  <div id="prediction-result" class="
+    {% if prediction %}
+      {% if 'not smoker' in prediction|lower %}
+        non-smoker
+      {% elif 'smoker' in prediction|lower %}
+        smoker
+      {% else %}
+        unknown
+      {% endif %}
+    {% else %}
+      unknown
+    {% endif %}
+  ">
+    {% if prediction %}
+    {{ prediction }}
+    {% else %}
+    Prediction Result
+    {% endif %}
+  </div>
+
+  <div id="dataset-info" style="margin-top: 3em; padding: 1em; border-top: 1px solid #ccc; font-size: 0.9em;">
+    <h3>About the Training Dataset</h3>
+    <p><strong>Data taken from:</strong></p>
+    <ul>
+      <li><a href="https://www.kaggle.com/competitions/playground-series-s3e24/overview" target="_blank">Playground
+          Series - Season 3, Episode 24</a></li>
+    </ul>
+    <p>
+      Smoking has been proven to negatively affect health in a multitude of ways.
+      Smoking has been found to harm nearly every organ of the body, cause many diseases,
+      as well as reducing the life expectancy of smokers in general.
+      As of 2018, smoking has been considered the leading cause of preventable morbidity and mortality in the world,
+      continuing to plague the world’s overall health.
+    </p>
+
+    <p>According to a World Health Organization report, the number of deaths caused by smoking will reach 10 million by
+      2030.
+      Evidence-based treatment for assistance in smoking cessation had been proposed and promoted.
+      However, only less than one third of the participants could achieve the goal of abstinence.
+      Many physicians found counseling for smoking cessation ineffective and time-consuming,
+      and did not routinely do so in daily practice.
+      To overcome this problem, several factors had been proposed to identify smokers who had a better chance of
+      quitting,
+      including the level of nicotine dependence, exhaled carbon monoxide (CO) concentration,
+      cigarette amount per day, the age at smoking initiation, previous quit attempts,
+      marital status, emotional distress, temperament and impulsivity scores, and the motivation to stop smoking.
+      However, individual use of these factors for prediction could lead to conflicting results that
+      were not straightforward enough for the physicians and patients to interpret and apply.
+      Providing a prediction model might be a favorable way to understand the chance of quitting smoking for each
+      individual smoker.
+      Health outcome prediction models had been developed using methods of machine learning over recent years.</p>
+
+    <p>The dataset was created to help scientists build models predicting smoking status using biometric signals.</p>
+
+    <h4>Dataset Features</h4>
+    <table border="1" cellpadding="5" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>age</td>
+          <td>5-year intervals</td>
+        </tr>
+        <tr>
+          <td>height (cm)</td>
+          <td>Height in centimeters</td>
+        </tr>
+        <tr>
+          <td>weight (kg)</td>
+          <td>Weight in kilograms</td>
+        </tr>
+        <tr>
+          <td>waist (cm)</td>
+          <td>Waist circumference</td>
+        </tr>
+        <tr>
+          <td>eyesight (left)</td>
+          <td>Vision (left eye)</td>
+        </tr>
+        <tr>
+          <td>eyesight (right)</td>
+          <td>Vision (right eye)</td>
+        </tr>
+        <tr>
+          <td>hearing (left)</td>
+          <td>Hearing (left ear)</td>
+        </tr>
+        <tr>
+          <td>hearing (right)</td>
+          <td>Hearing (right ear)</td>
+        </tr>
+        <tr>
+          <td>systolic</td>
+          <td>Systolic blood pressure</td>
+        </tr>
+        <tr>
+          <td>relaxation</td>
+          <td>Diastolic (relaxation) blood pressure</td>
+        </tr>
+        <tr>
+          <td>fasting blood sugar</td>
+          <td>Fasting blood sugar</td>
+        </tr>
+        <tr>
+          <td>Cholesterol</td>
+          <td>Total cholesterol</td>
+        </tr>
+        <tr>
+          <td>triglyceride</td>
+          <td>Triglyceride</td>
+        </tr>
+        <tr>
+          <td>HDL</td>
+          <td>High-density lipoprotein cholesterol</td>
+        </tr>
+        <tr>
+          <td>LDL</td>
+          <td>Low-density lipoprotein cholesterol</td>
+        </tr>
+        <tr>
+          <td>hemoglobin</td>
+          <td>Hemoglobin level</td>
+        </tr>
+        <tr>
+          <td>Urine protein</td>
+          <td>Urine protein level</td>
+        </tr>
+        <tr>
+          <td>serum creatinine</td>
+          <td>Serum creatinine</td>
+        </tr>
+        <tr>
+          <td>AST</td>
+          <td>Glutamic oxaloacetic transaminase</td>
+        </tr>
+        <tr>
+          <td>ALT</td>
+          <td>Glutamic pyruvic transaminase</td>
+        </tr>
+        <tr>
+          <td>Gtp</td>
+          <td>γ-GTP (Gamma-glutamyl transferase)</td>
+        </tr>
+        <tr>
+          <td>dental caries</td>
+          <td>Dental caries (yes/no)</td>
+        </tr>
+        <tr>
+          <td>smoking</td>
+          <td>Smoking status (target variable)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- site footer -->
+  <footer id="site-footer">
+    @2025
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // dummy data — replace later
+
+    const form = document.getElementById("main-form");
+    const select = document.getElementById("model");
+    const infoDiv = document.getElementById("model-info");
+    const resultDiv = document.getElementById("prediction-result");
+    const clearBtn = document.getElementById("clear");
+
+    clearBtn.addEventListener("click", () => {
+      window.location.href = "{{ url_for('index') }}";
+    });
+
+    form.addEventListener("submit", () => {
+      document.getElementById("loading-overlay").style.display = "flex";
+    });
+
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+app/
+├── models
+│   ├── model_df_M2_step04_train_logreg_basic
+│   │   ├── model_df_M2_step04_train_logreg_basic.pkl
+│   │   ├── model_M2_scalernya.pkl
+│   │   └── modelrun.py
+│   ├── model_df_M2_step04_train_logreg_bestModel_AUC
+│   │   ├── model_df_M2_step04_train_logreg_bestModel_AUC.pkl
+│   │   ├── model_M2_scalernya.pkl
+│   │   └── modelrun.py
+│   ├── model_df_M2_step04_train_randomForest_basic
+│   │   ├── model_df_M2_step04_train_randomForest_basic.pkl
+│   │   ├── model_M2_scalernya.pkl
+│   │   └── modelrun.py
+│   ├── model_df_M2_step04_train_randomForest_bestModel_AUC
+│   │   ├── model_df_M2_step04_train_randomForest_bestModel_AUC.pkl
+│   │   ├── model_M2_scalernya.pkl
+│   │   └── modelrun.py
+│   ├── model_df_M2_step04_train_xgboost_basic
+│   │   ├── model_df_M2_step04_train_xgboost_basic.pkl
+│   │   ├── model_M2_scalernya.pkl
+│   │   └── modelrun.py
+│   ├── model_df_M2_step04_train_xgboost_bestModel_AUC
+│   │   ├── model_df_M2_step04_train_xgboost_bestModel_AUC.pkl
+│   │   ├── model_M2_scalernya.pkl
+│   │   └── modelrun.py
+│   ├── NOT MODEL test only A
+│   │   └── modelrun.py
+│   ├── NOT MODEL test only B
+│   │   └── modelrun.py
+│   └── NOT MODEL test only C
+│       └── modelrun.py
+├── static
+│   ├── ai-01.png
+│   ├── data_contoh.csv
+│   └── style.css
+├── templates
+│   └── index.html
+├── .flaskenv
+├── app.py
+├── requirements.txt
+├── structure.txt
+└── tree.py
