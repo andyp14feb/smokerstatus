@@ -12,6 +12,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Set environment variables
 ENV FLASK_APP=app:app
 ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_RUN_PORT=$PORT
+
 
 EXPOSE 8000
 
