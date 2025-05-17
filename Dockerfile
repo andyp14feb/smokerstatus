@@ -15,7 +15,7 @@ ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_RUN_PORT=$PORT
 
 
-EXPOSE 5000
+EXPOSE 8080
 
 # Use Railway's injected $PORT
 CMD ["sh", "-c", "flask run --host=0.0.0.0 --port=$PORT"]
